@@ -1,1 +1,28 @@
+html, body {
+    margin: 0;
+    background: #000;
+    height: 100%;
+    overflow: hidden;
+}
 
+#viewer {
+    width: 100vw;
+    height: 100vh;
+}
+
+#fsBtn {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    font-size: 18px;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+#fsBtn:hover {
+    background: rgba(0,0,0,0.9);
+}
