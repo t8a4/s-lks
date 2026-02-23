@@ -20,6 +20,12 @@ function loadPresentation() {
     slideWidth: "100%",
     slideHeight: "100%"
 });
+    setTimeout(() => {
+    if (window.divs2slides) {
+        window.divs2slides.transition = "fade";
+        window.divs2slides.transitionTime = 0.4;
+    }
+}, 600);
 }
 
 window.addEventListener("hashchange", loadPresentation);
