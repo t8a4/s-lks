@@ -12,6 +12,9 @@ function loadPresentation() {
     $("#viewer").pptxToHtml({
     pptxFileUrl: file,
     slideMode: true,
+    slideModeConfig: {
+        transition: "fade"
+    },
     slideWidth: "100%",
     slideHeight: "100%"
 });
