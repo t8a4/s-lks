@@ -1,29 +1,32 @@
 function parseHash() {
     const raw = window.location.hash.replace("#", "");
 
-    if (!raw) {
-        return { talk: "talk1", transition: "fade" };
-    }
+    const defaults = {
+        talk: "talk1",
+        transition: "fade",
+        speed: 0.4,
+        autoplay: false,
+        loop: false,
+        start: 1
+    };
+
+    if (!raw) return defaults;
 
     const [talkPart, queryPart] = raw.split("?");
-
-    let transition = "fade";
-
-    if (queryPart) {
-        const params = new URLSearchParams(queryPart);
-        if (params.get("transition")) {
-            transition = params.get("transition");
-        }
-    }
+    const params = new URLSearchParams(queryPart || "");
 
     return {
-        talk: talkPart || "talk1",
-        transition: transition
+        talk: talkPart || defaults.talk,
+        transition: params.get("transition") || defaults.transition,
+        speed: parseFloat(params.get("speed")) || defaults.speed,
+        autoplay: params.get("autoplay") ? parseFloat(params.get("autoplay")) : defaults.autoplay,
+        loop: params.get("loop") === "true",
+        start: parseInt(params.get("start")) || defaults.start
     };
 }
 
 function loadPresentation() {
-    const { talk, transition } = parseHash();
+    const { talk, transition, speed, autoplay, loop, start } = parseHash();
     const file = `../presentations/${talk}.pptx`;
 
     document.getElementById("viewer").innerHTML = "";
@@ -31,13 +34,19 @@ function loadPresentation() {
     $("#viewer").pptxToHtml({
         pptxFileUrl: file,
         slideMode: true,
-        keyBoardShortCut: true,
+        keyBoardShortCut: false,
         mediaProcess: true,
 
         slideModeConfig: {
+            first: start,
             transition: transition,
-            transitionTime: 0.3,
-
+            transitionTime: speed,
+            autoSlide: autoplay,
+            loop: loop,
+            nav: false,
+            showSlideNum: false,
+            showTotalSlideNum: false,
+            keyBoardShortCut: true
         },
 
         slideWidth: "100%",
