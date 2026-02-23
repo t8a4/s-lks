@@ -15,17 +15,12 @@ function loadPresentation() {
     keyBoardShortCut: true,
     mediaProcess: true,
     slideModeConfig: {
-        transition: "random"
+        transition: "random",
+        transitionTime: 0.3
     },
     slideWidth: "100%",
     slideHeight: "100%"
 });
-    setTimeout(() => {
-    if (window.divs2slides) {
-        window.divs2slides.transition = "fade";
-        window.divs2slides.transitionTime = 0.4;
-    }
-}, 600);
 }
 
 window.addEventListener("hashchange", loadPresentation);
