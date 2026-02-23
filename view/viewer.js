@@ -23,7 +23,6 @@ function loadPresentation() {
             showSlideNum: false,
             showTotalSlideNum: false
         },
-
         slideWidth: "100%",
         slideHeight: "100%"
     });
