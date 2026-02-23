@@ -16,14 +16,14 @@ function loadPresentation() {
         mediaProcess: true,
 
         slideModeConfig: {
-        transition: "fade",
-        transitionTime: 0.5,
-        autoSlide: false,
-        nav: false,
-        showSlideNum: false,
-        showTotalSlideNum: false
+            transition: "fade",
+            transitionTime: 0.5,
+            autoSlide: false,
+            nav: false,
+            showSlideNum: false,
+            showTotalSlideNum: false
         },
-            
+
         slideWidth: "100%",
         slideHeight: "100%"
     });
