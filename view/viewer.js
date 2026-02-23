@@ -26,10 +26,14 @@ function parseHash() {
 }
 
 function loadPresentation() {
+
+    // 🔥 HARD RESET – маха старите event listeners и divs2slides instance
+    const oldViewer = document.getElementById("viewer");
+    const newViewer = oldViewer.cloneNode(false);
+    oldViewer.replaceWith(newViewer);
+
     const { talk, transition, speed, autoplay, loop, start } = parseHash();
     const file = `../presentations/${talk}.pptx`;
-
-    document.getElementById("viewer").innerHTML = "";
 
     $("#viewer").pptxToHtml({
         pptxFileUrl: file,
@@ -43,9 +47,9 @@ function loadPresentation() {
             transitionTime: speed,
             autoSlide: autoplay,
             loop: loop,
-            nav: false,
-            showSlideNum: false,
-            showTotalSlideNum: false,
+            nav: true,
+            showSlideNum: true,
+            showTotalSlideNum: true,
             keyBoardShortCut: true
         },
 
