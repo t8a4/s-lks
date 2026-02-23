@@ -10,22 +10,11 @@ function loadPresentation() {
     document.getElementById("viewer").innerHTML = "";
 
     $("#viewer").pptxToHtml({
-        pptxFileUrl: file,
-        slideMode: true,
-        keyBoardShortCut: true,
-        mediaProcess: true,
-
-        slideModeConfig: {
-            transition: "fade",
-            transitionTime: 0.5,
-            autoSlide: false,
-            nav: false,
-            showSlideNum: false,
-            showTotalSlideNum: false
-        },
-        slideWidth: "100%",
-        slideHeight: "100%"
-    });
+    pptxFileUrl: file,
+    slideMode: true,
+    slideWidth: "100%",
+    slideHeight: "100%"
+});
 }
 
 window.addEventListener("hashchange", loadPresentation);
