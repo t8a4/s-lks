@@ -45,7 +45,9 @@ function loadPresentation() {
     });
 }
 
-window.addEventListener("hashchange", loadPresentation);
+window.addEventListener("hashchange", () => {
+    window.location.reload();
+});
 window.addEventListener("load", loadPresentation);
 
 document.getElementById("fsBtn").addEventListener("click", () => {
