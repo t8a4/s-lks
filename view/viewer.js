@@ -12,8 +12,10 @@ function loadPresentation() {
     $("#viewer").pptxToHtml({
     pptxFileUrl: file,
     slideMode: true,
+    keyBoardShortCut: true,
+    mediaProcess: true,
     slideModeConfig: {
-        transition: "fade"
+        transition: "random"
     },
     slideWidth: "100%",
     slideHeight: "100%"
