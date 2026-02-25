@@ -65,26 +65,33 @@ document.getElementById("fileInput").addEventListener("change", function (e) {
     const reader = new FileReader();
 
     reader.onload = function (event) {
-        const arrayBuffer = event.target.result;
+    const arrayBuffer = event.target.result;
 
-        document.getElementById("viewer").innerHTML = "";
+    // 👉 правим временен URL от файла
+    const blob = new Blob([arrayBuffer], {
+        type: "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    });
 
-        $("#viewer").pptxToHtml({
-            pptxFileUrl: arrayBuffer,
-            slideMode: true,
-            keyBoardShortCut: true,
-            mediaProcess: true,
+    const blobUrl = URL.createObjectURL(blob);
 
-            slideModeConfig: {
-                transition: "fade",
-                transitionTime: 0.4,
-                nav: true
-            },
+    document.getElementById("viewer").innerHTML = "";
 
-            slideWidth: "100%",
-            slideHeight: "100%"
-        });
-    };
+    $("#viewer").pptxToHtml({
+        pptxFileUrl: blobUrl,   // ✔ вече е URL string
+        slideMode: true,
+        keyBoardShortCut: true,
+        mediaProcess: true,
+
+        slideModeConfig: {
+            transition: "fade",
+            transitionTime: 0.4,
+            nav: true
+        },
+
+        slideWidth: "100%",
+        slideHeight: "100%"
+    });
+};
 
     reader.readAsArrayBuffer(file);
 });
