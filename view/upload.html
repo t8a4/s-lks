@@ -6,19 +6,16 @@
 <title>PPTX Upload Viewer</title>
 
 <link rel="stylesheet" href="../libs/pptxjs/pptxjs.css" />
-<link rel="stylesheet" href="viewer.css" />
-
 
 <script src="../libs/pptxjs/jquery-1.11.3.min.js"></script>
-
+    
 <script src="../libs/pptxjs/jszip.min.js"></script>
 <script src="../libs/pptxjs/d3.min.js"></script>
 <script src="../libs/pptxjs/nv.d3.min.js"></script>
-
 <script src="../libs/pptxjs/filereader.js"></script>
 <script src="../libs/pptxjs/divs2slides.min.js"></script>
 <script src="../libs/pptxjs/jquery.fullscreen-min.js"></script>
-
+    
 <script src="../libs/pptxjs/pptxjs.js"></script>
 
 <style>
@@ -34,21 +31,32 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 50px;
     background: #222;
+    padding: 10px;
     display: flex;
     align-items: center;
-    padding: 0 15px;
+    gap: 10px;
     z-index: 1000;
+}
+
+#options {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 #viewer {
     position: fixed;
-    inset: 50px 0 0 0;
+    inset: 70px 0 0 0;
+    background: black;
 }
 
-input {
-    color: white;
+button {
+    padding: 5px 10px;
+}
+
+select, input[type="number"] {
+    padding: 3px;
 }
 </style>
 </head>
@@ -57,58 +65,157 @@ input {
 
 <div id="topbar">
     <input type="file" id="fileInput" accept=".pptx" />
+    <button id="previewBtn" disabled>Preview</button>
+    <span id="fileName"></span>
+
+    <div id="options">
+        Transition:
+        <select id="transition">
+            <option value="fade">Fade</option>
+            <option value="slid">Slide</option>
+            <option value="random">Random</option>
+        </select>
+
+        Speed:
+        <input type="number" id="speed" step="0.1" value="0.4" min="0.1" max="3">
+
+        Loop:
+        <input type="checkbox" id="loop">
+    </div>
 </div>
 
 <div id="viewer"></div>
 
 <script>
+
+let selectedFile = null;
+let presentationLoaded = false;
+
+/* ============================= */
+/* FILE SELECT */
+/* ============================= */
+
 document.getElementById("fileInput").addEventListener("change", function (e) {
-    const file = e.target.files[0];
-    if (!file) return;
+    selectedFile = e.target.files[0];
+    if (!selectedFile) return;
+
+    document.getElementById("fileName").textContent = selectedFile.name;
+    document.getElementById("previewBtn").disabled = false;
+});
+
+/* ============================= */
+/* PREVIEW CLICK */
+/* ============================= */
+
+document.getElementById("previewBtn").addEventListener("click", () => {
+    if (!selectedFile) return;
+    loadPresentation(selectedFile);
+});
+
+/* ============================= */
+/* LOAD PRESENTATION */
+/* ============================= */
+
+function loadPresentation(file) {
 
     const reader = new FileReader();
 
     reader.onload = function (event) {
-    const arrayBuffer = event.target.result;
+        const arrayBuffer = event.target.result;
 
-    // 👉 правим временен URL от файла
-    const blob = new Blob([arrayBuffer], {
+        const blob = new Blob([arrayBuffer], {
+            type: "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        });
+
+        const blobUrl = URL.createObjectURL(blob);
+
+        document.getElementById("viewer").innerHTML = "";
+
+        const transition = document.getElementById("transition").value;
+        const speed = parseFloat(document.getElementById("speed").value);
+        const loop = document.getElementById("loop").checked;
+
+        $("#viewer").pptxToHtml({
+            pptxFileUrl: blobUrl,
+            slideMode: true,
+            keyBoardShortCut: true,
+            mediaProcess: true,
+
+            slideModeConfig: {
+                transition: transition,
+                transitionTime: speed,
+                loop: loop,
+                nav: true
+            },
+
+            slideWidth: "100%",
+            slideHeight: "100%"
+        });
+
+        const waitForSlides = setInterval(() => {
+            if (document.querySelector(".slide")) {
+                clearInterval(waitForSlides);
+
+                document.getElementById("topbar").style.display = "none";
+                document.getElementById("viewer").style.inset = "0";
+
+                presentationLoaded = true;
+                saveLastFile(file);
+            }
+        }, 100);
+    };
+
+    reader.readAsArrayBuffer(file);
+}
+
+/* ============================= */
+/* REMEMBER LAST FILE */
+/* ============================= */
+
+async function saveLastFile(file) {
+    const buffer = await file.arrayBuffer();
+    const bytes = new Uint8Array(buffer);
+
+    let binary = "";
+    bytes.forEach(b => binary += String.fromCharCode(b));
+
+    localStorage.setItem("lastPPTX", btoa(binary));
+    localStorage.setItem("lastPPTXName", file.name);
+}
+
+function loadLastFile() {
+    const base64 = localStorage.getItem("lastPPTX");
+    if (!base64) return;
+
+    const binary = atob(base64);
+    const bytes = new Uint8Array(binary.length);
+
+    for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+
+    const blob = new Blob([bytes], {
         type: "application/vnd.openxmlformats-officedocument.presentationml.presentation"
     });
 
-    const blobUrl = URL.createObjectURL(blob);
+    selectedFile = blob;
+    document.getElementById("fileName").textContent =
+        localStorage.getItem("lastPPTXName") + " (remembered)";
+    document.getElementById("previewBtn").disabled = false;
+}
 
-    document.getElementById("viewer").innerHTML = "";
+window.addEventListener("load", loadLastFile);
 
-    $("#viewer").pptxToHtml({
-        pptxFileUrl: blobUrl,   // ✔ вече е URL string
-        slideMode: true,
-        keyBoardShortCut: true,
-        mediaProcess: true,
+/* ============================= */
+/* PREVENT RIGHT CLICK */
+/* ============================= */
 
-        slideModeConfig: {
-            transition: "fade",
-            transitionTime: 0.4,
-            nav: true
-        },
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("dragstart", e => e.preventDefault());
 
-        slideWidth: "100%",
-        slideHeight: "100%"
-    });
-// изчакай докато slide се появи → скрий upload бара
-const waitForSlides = setInterval(() => {
-    if (document.querySelector(".slide")) {
-        clearInterval(waitForSlides);
-        document.getElementById("topbar").style.display = "none";
-        presentationLoaded = true;
-    }
-}, 100);
-};
-
-    reader.readAsArrayBuffer(file);
-});
-
-    let presentationLoaded = false;
+/* ============================= */
+/* REFRESH WARNING */
+/* ============================= */
 
 window.addEventListener("beforeunload", function (e) {
     if (presentationLoaded) {
@@ -116,6 +223,7 @@ window.addEventListener("beforeunload", function (e) {
         e.returnValue = "";
     }
 });
+
 </script>
 
 </body>
