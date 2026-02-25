@@ -95,9 +95,26 @@ document.getElementById("fileInput").addEventListener("change", function (e) {
         slideWidth: "100%",
         slideHeight: "100%"
     });
+// изчакай докато slide се появи → скрий upload бара
+const waitForSlides = setInterval(() => {
+    if (document.querySelector(".slide")) {
+        clearInterval(waitForSlides);
+        document.getElementById("topbar").style.display = "none";
+        presentationLoaded = true;
+    }
+}, 100);
 };
 
     reader.readAsArrayBuffer(file);
+});
+
+    let presentationLoaded = false;
+
+window.addEventListener("beforeunload", function (e) {
+    if (presentationLoaded) {
+        e.preventDefault();
+        e.returnValue = "";
+    }
 });
 </script>
 
