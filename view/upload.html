@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PPTX Upload Viewer</title>
+
+<link rel="stylesheet" href="../libs/pptxjs/css/pptxjs.css">
+
+<script src="../libs/pptxjs/js/jquery-1.11.3.min.js"></script>
+<script src="../libs/pptxjs/js/jszip.min.js"></script>
+<script src="../libs/pptxjs/js/d3.min.js"></script>
+<script src="../libs/pptxjs/js/nv.d3.min.js"></script>
+<script src="../libs/pptxjs/js/filereader.js"></script>
+<script src="../libs/pptxjs/divs2slides.min.js"></script>
+<script src="../libs/pptxjs/js/pptxjs.js"></script>
+
+<style>
+body {
+    margin: 0;
+    background: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+#topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: #222;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 1000;
+}
+
+#viewer {
+    position: fixed;
+    inset: 50px 0 0 0;
+}
+
+input {
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div id="topbar">
+    <input type="file" id="fileInput" accept=".pptx" />
+</div>
+
+<div id="viewer"></div>
+
+<script>
+document.getElementById("fileInput").addEventListener("change", function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+        const arrayBuffer = event.target.result;
+
+        document.getElementById("viewer").innerHTML = "";
+
+        $("#viewer").pptxToHtml({
+            pptxFileUrl: arrayBuffer,
+            slideMode: true,
+            keyBoardShortCut: true,
+            mediaProcess: true,
+
+            slideModeConfig: {
+                transition: "fade",
+                transitionTime: 0.4,
+                nav: true
+            },
+
+            slideWidth: "100%",
+            slideHeight: "100%"
+        });
+    };
+
+    reader.readAsArrayBuffer(file);
+});
+</script>
+
+</body>
+</html>
