@@ -88,14 +88,48 @@ function waitAndScale() {
 
     const interval = setInterval(() => {
 
-        if (document.querySelector(".slide")) {
+        const slide = document.querySelector(".slide");
+
+        if (slide && slide.offsetWidth > 0) {
+
             clearInterval(interval);
+
             scalePresentation();
+
+            // pptxjs прави късен layout update
+            setTimeout(scalePresentation, 300);
+            setTimeout(scalePresentation, 700);
         }
 
     }, 100);
 }
-
 /* resize events */
-window.addEventListener("resize", scalePresentation);
-window.addEventListener("orientationchange", scalePresentation);
+/* ============================= */
+/* SMART AUTO RESCALE */
+/* ============================= */
+
+let resizeTimeout;
+
+function triggerRescale() {
+
+    clearTimeout(resizeTimeout);
+
+    resizeTimeout = setTimeout(() => {
+        scalePresentation();
+    }, 150);
+}
+
+window.addEventListener("resize", triggerRescale);
+window.addEventListener("orientationchange", triggerRescale);
+
+/* ============================= */
+/* RESCALE WHEN SLIDE CHANGES */
+/* ============================= */
+
+document.addEventListener("click", () => {
+    setTimeout(scalePresentation, 120);
+});
+
+document.addEventListener("keydown", () => {
+    setTimeout(scalePresentation, 120);
+});
