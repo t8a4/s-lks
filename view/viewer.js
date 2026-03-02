@@ -57,3 +57,44 @@ document.getElementById("fsBtn").addEventListener("click", () => {
         document.exitFullscreen();
     }
 });
+
+/* ============================= */
+/* RESPONSIVE AUTO SCALE */
+/* ============================= */
+
+function scalePresentation() {
+
+    const slide = document.querySelector(".slide");
+    if (!slide) return;
+
+    const wrapper = document.getElementById("viewerWrapper");
+
+    const slideWidth = slide.offsetWidth;
+    const slideHeight = slide.offsetHeight;
+
+    const scaleX = wrapper.clientWidth / slideWidth;
+    const scaleY = wrapper.clientHeight / slideHeight;
+
+    const scale = Math.min(scaleX, scaleY);
+
+    document.getElementById("viewer").style.transform =
+        `scale(${scale})`;
+}
+
+
+/* чака pptxjs да render-не */
+function waitAndScale() {
+
+    const interval = setInterval(() => {
+
+        if (document.querySelector(".slide")) {
+            clearInterval(interval);
+            scalePresentation();
+        }
+
+    }, 100);
+}
+
+/* resize events */
+window.addEventListener("resize", scalePresentation);
+window.addEventListener("orientationchange", scalePresentation);
