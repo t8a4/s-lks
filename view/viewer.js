@@ -43,7 +43,6 @@ function loadPresentation() {
         slideWidth: "100%",
         slideHeight: "100%"
     });
-    waitAndScale();
 }
 
 window.addEventListener("hashchange", () => {
@@ -57,79 +56,4 @@ document.getElementById("fsBtn").addEventListener("click", () => {
     } else {
         document.exitFullscreen();
     }
-});
-
-/* ============================= */
-/* RESPONSIVE AUTO SCALE */
-/* ============================= */
-
-function scalePresentation() {
-
-    const slide = document.querySelector(".slide");
-    if (!slide) return;
-
-    const wrapper = document.getElementById("viewerWrapper");
-
-    const slideWidth = slide.offsetWidth;
-    const slideHeight = slide.offsetHeight;
-
-    const scaleX = wrapper.clientWidth / slideWidth;
-    const scaleY = wrapper.clientHeight / slideHeight;
-
-    const scale = Math.min(scaleX, scaleY);
-
-    document.getElementById("viewer").style.transform =
-        `scale(${scale})`;
-}
-
-
-/* чака pptxjs да render-не */
-function waitAndScale() {
-
-    const interval = setInterval(() => {
-
-        const slide = document.querySelector(".slide");
-
-        if (slide && slide.offsetWidth > 0) {
-
-            clearInterval(interval);
-
-            scalePresentation();
-
-            // pptxjs прави късен layout update
-            setTimeout(scalePresentation, 300);
-            setTimeout(scalePresentation, 700);
-        }
-
-    }, 100);
-}
-/* resize events */
-/* ============================= */
-/* SMART AUTO RESCALE */
-/* ============================= */
-
-let resizeTimeout;
-
-function triggerRescale() {
-
-    clearTimeout(resizeTimeout);
-
-    resizeTimeout = setTimeout(() => {
-        scalePresentation();
-    }, 150);
-}
-
-window.addEventListener("resize", triggerRescale);
-window.addEventListener("orientationchange", triggerRescale);
-
-/* ============================= */
-/* RESCALE WHEN SLIDE CHANGES */
-/* ============================= */
-
-document.addEventListener("click", () => {
-    setTimeout(scalePresentation, 120);
-});
-
-document.addEventListener("keydown", () => {
-    setTimeout(scalePresentation, 120);
 });
