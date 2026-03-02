@@ -5,6 +5,11 @@ html, body {
     overflow: hidden;
 }
 
+/* ===============================
+   RESPONSIVE PRESENTATION BOX
+================================ */
+
+/* екран */
 #viewerWrapper {
     position: fixed;
     inset: 0;
@@ -13,11 +18,19 @@ html, body {
     justify-content: center;
     align-items: center;
 
+    background: black;
     overflow: hidden;
 }
 
+/* desktop presentation size */
 #viewer {
-    transform-origin: center center;
+    width: 1280px;
+    height: 720px;
+
+    max-width: 100vw;
+    max-height: 100vh;
+
+    aspect-ratio: 16 / 9;
 }
 
 #fsBtn {
