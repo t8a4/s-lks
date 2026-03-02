@@ -43,6 +43,7 @@ function loadPresentation() {
         slideWidth: "100%",
         slideHeight: "100%"
     });
+    waitAndScale();
 }
 
 window.addEventListener("hashchange", () => {
