@@ -43,6 +43,7 @@ function loadPresentation() {
         slideWidth: 1280,
         slideHeight: 720
     });
+    setTimeout(scalePresentation, 500);
 }
 
 window.addEventListener("hashchange", () => {
@@ -57,3 +58,20 @@ document.getElementById("fsBtn").addEventListener("click", () => {
         document.exitFullscreen();
     }
 });
+function scalePresentation() {
+
+    const baseWidth = 1280;
+    const baseHeight = 720;
+
+    const scaleX = window.innerWidth / baseWidth;
+    const scaleY = window.innerHeight / baseHeight;
+
+    const scale = Math.min(scaleX, scaleY);
+
+    const container = document.getElementById("scaleContainer");
+
+    container.style.transform =
+        `translate(-50%, -50%) scale(${scale})`;
+}
+window.addEventListener("resize", scalePresentation);
+window.addEventListener("orientationchange", scalePresentation);
