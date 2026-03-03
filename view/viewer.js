@@ -43,7 +43,6 @@ function loadPresentation() {
         slideWidth: 1280,
         slideHeight: 720
     });
-    setTimeout(fitSlide, 600);
 }
 
 window.addEventListener("hashchange", () => {
@@ -58,32 +57,3 @@ document.getElementById("fsBtn").addEventListener("click", () => {
         document.exitFullscreen();
     }
 });
-function fitViewer() {
-
-    const wrapper = document.getElementById("viewerWrapper");
-    const viewer = document.getElementById("viewer");
-
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-
-    const targetRatio = 16 / 9;
-
-    let width, height;
-
-    if (vw / vh > targetRatio) {
-        height = vh;
-        width = vh * targetRatio;
-    } else {
-        width = vw;
-        height = vw / targetRatio;
-    }
-
-    viewer.style.width = width + "px";
-    viewer.style.height = height + "px";
-
-    viewer.style.left = (vw - width) / 2 + "px";
-    viewer.style.top = (vh - height) / 2 + "px";
-}
-
-window.addEventListener("resize", fitViewer);
-window.addEventListener("orientationchange", fitViewer);
