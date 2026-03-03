@@ -43,6 +43,7 @@ function loadPresentation() {
         slideWidth: 1280,
         slideHeight: 720
     });
+    setTimeout(fitPresentation, 700);
 }
 
 window.addEventListener("hashchange", () => {
@@ -56,4 +57,25 @@ document.getElementById("fsBtn").addEventListener("click", () => {
     } else {
         document.exitFullscreen();
     }
+});
+
+function fitPresentation() {
+
+    const viewer = document.getElementById("viewer");
+
+    const screenW = window.innerWidth;
+    const screenH = window.innerHeight;
+
+    const scaleX = screenW / 1280;
+    const scaleY = screenH / 720;
+
+    const scale = Math.min(scaleX, scaleY);
+
+    viewer.style.transform =
+        `scale(${scale})`;
+}
+window.addEventListener("resize", fitPresentation);
+
+window.addEventListener("orientationchange", () => {
+    setTimeout(fitPresentation, 300);
 });
