@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<style>
+html,body{
+    margin:0;
+    height:100%;
+    background:black;
+    overflow:hidden;
+}
+
+#frameWrapper{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* desktop size */
+iframe{
+    width:1280px;
+    height:720px;
+    border:none;
+    transform-origin:center center;
+}
+</style>
+</head>
+
+<body>
+
+<div id="frameWrapper">
+    <iframe id="pptFrame"></iframe>
+</div>
+
+<script>
+
+const frame=document.getElementById("pptFrame");
+
+/* зареждаме същия viewer */
+frame.src="index.html"+window.location.hash;
+
+function scaleFrame(){
+
+    const scaleX=window.innerWidth/1280;
+    const scaleY=window.innerHeight/720;
+
+    const scale=Math.min(scaleX,scaleY);
+
+    frame.style.transform=
+        `scale(${scale})`;
+}
+
+window.addEventListener("resize",scaleFrame);
+window.addEventListener("orientationchange",scaleFrame);
+
+scaleFrame();
+
+</script>
+
+</body>
+</html>
