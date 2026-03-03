@@ -5,19 +5,21 @@ html, body {
     overflow: hidden;
 }
 
-/* screen */
+/* SCREEN */
 #viewerWrapper {
     position: fixed;
     inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background: black;
 }
 
-/* SCALE CONTAINER */
+/* SCALE HOLDER */
 #scaleContainer {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform-origin: top left;
+    transform-origin: center center;
 }
 
 /* REAL PPT SIZE */
