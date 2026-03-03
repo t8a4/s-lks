@@ -2,45 +2,26 @@ html, body {
     margin: 0;
     height: 100%;
     background: black;
-}
-
-/* SCREEN */
-#viewerWrapper {
-    position: fixed;
-    inset: 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: black;
-}
-
-/* PRESENTATION BOX */
-#viewer {
-
-    width: min(100vw, calc(100vh * 16 / 9));
-    height: min(100vh, calc(100vw * 9 / 16));
-
-    background: black;
     overflow: hidden;
 }
 
-/* fullscreen button */
-#fsBtn {
+/* screen */
+#viewerWrapper {
     position: fixed;
-    bottom: 15px;
-    right: 15px;
-    z-index: 9999;
-
-    background: rgba(0,0,0,0.6);
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 6px;
-    cursor: pointer;
+    inset: 0;
+    background: black;
 }
 
-.tvarabotichudesno {
-    color: #123450
+/* SCALE CONTAINER */
+#scaleContainer {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: top left;
+}
+
+/* REAL PPT SIZE */
+#viewer {
+    width: 1280px;
+    height: 720px;
 }
