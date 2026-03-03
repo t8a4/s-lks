@@ -1,29 +1,33 @@
 html, body {
     margin: 0;
     height: 100%;
-    background: black;
+    background: white;
     overflow: hidden;
 }
 
-/* SCREEN */
 #viewerWrapper {
     position: fixed;
     inset: 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     background: black;
 }
 
-/* SCALE HOLDER */
-#scaleContainer {
-    transform-origin: center center;
+#viewer {
+    width: 100%;
+    height: 100%;
+}
+#fsBtn {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    font-size: 18px;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 6px;
 }
 
-/* REAL PPT SIZE */
-#viewer {
-    width: 1280px;
-    height: 720px;
+#fsBtn:hover {
+    background: rgba(0,0,0,0.9);
 }
