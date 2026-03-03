@@ -90,6 +90,30 @@ window.addEventListener("orientationchange", fitIframe);
 window.addEventListener("load", fitIframe);
 
 </script>
+<script>
+let startX = 0;
+
+document.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend", e => {
+
+    const diff =
+        e.changedTouches[0].clientX - startX;
+
+    if (Math.abs(diff) < 50) return;
+
+    if (diff < 0)
+        document.dispatchEvent(
+            new KeyboardEvent("keydown",{key:"ArrowRight"})
+        );
+    else
+        document.dispatchEvent(
+            new KeyboardEvent("keydown",{key:"ArrowLeft"})
+        );
+});
+</script>
 
 </body>
 </html>
