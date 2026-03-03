@@ -58,32 +58,32 @@ document.getElementById("fsBtn").addEventListener("click", () => {
         document.exitFullscreen();
     }
 });
-/* ========================= */
-/* SCALE PRESENTATION */
-/* ========================= */
+function fitViewer() {
 
-function fitSlide() {
-
-    const slide = document.querySelector(".slide");
+    const wrapper = document.getElementById("viewerWrapper");
     const viewer = document.getElementById("viewer");
 
-    if (!slide || !viewer) return;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
 
-    const scaleX = viewer.clientWidth / slide.offsetWidth;
-    const scaleY = viewer.clientHeight / slide.offsetHeight;
+    const targetRatio = 16 / 9;
 
-    const scale = Math.min(scaleX, scaleY);
+    let width, height;
 
-    slide.style.transform = `scale(${scale})`;
+    if (vw / vh > targetRatio) {
+        height = vh;
+        width = vh * targetRatio;
+    } else {
+        width = vw;
+        height = vw / targetRatio;
+    }
+
+    viewer.style.width = width + "px";
+    viewer.style.height = height + "px";
+
+    viewer.style.left = (vw - width) / 2 + "px";
+    viewer.style.top = (vh - height) / 2 + "px";
 }
-/* ========================= */
-/* RESIZE FIX */
-/* ========================= */
 
-window.addEventListener("resize", () => {
-    setTimeout(fitSlide, 150);
-});
-
-window.addEventListener("orientationchange", () => {
-    setTimeout(fitSlide, 300);
-});
+window.addEventListener("resize", fitViewer);
+window.addEventListener("orientationchange", fitViewer);
