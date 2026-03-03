@@ -40,8 +40,8 @@ function loadPresentation() {
             nav: true,
         },
 
-        slideWidth: "100%",
-        slideHeight: "100%"
+        slideWidth: 1280,
+        slideHeight: 720
     });
     setTimeout(fitSlide, 600);
 }
