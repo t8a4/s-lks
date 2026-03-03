@@ -43,6 +43,7 @@ function loadPresentation() {
         slideWidth: "100%",
         slideHeight: "100%"
     });
+    setTimeout(fitSlide, 600);
 }
 
 window.addEventListener("hashchange", () => {
@@ -56,4 +57,33 @@ document.getElementById("fsBtn").addEventListener("click", () => {
     } else {
         document.exitFullscreen();
     }
+});
+/* ========================= */
+/* SCALE PRESENTATION */
+/* ========================= */
+
+function fitSlide() {
+
+    const slide = document.querySelector(".slide");
+    const viewer = document.getElementById("viewer");
+
+    if (!slide || !viewer) return;
+
+    const scaleX = viewer.clientWidth / slide.offsetWidth;
+    const scaleY = viewer.clientHeight / slide.offsetHeight;
+
+    const scale = Math.min(scaleX, scaleY);
+
+    slide.style.transform = `scale(${scale})`;
+}
+/* ========================= */
+/* RESIZE FIX */
+/* ========================= */
+
+window.addEventListener("resize", () => {
+    setTimeout(fitSlide, 150);
+});
+
+window.addEventListener("orientationchange", () => {
+    setTimeout(fitSlide, 300);
 });
