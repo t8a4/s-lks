@@ -5,27 +5,26 @@
 content="width=device-width, initial-scale=1">
 
 <style>
-html,body{
-    margin:0;
-    height:100%;
-    background:black;
-    overflow:hidden;
+html, body {
+    margin: 0;
+    height: 100%;
+    background: black;
+    overflow: hidden;
 }
 
-#frameWrapper{
-    position:fixed;
-    inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+#frameWrapper {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* desktop size */
-iframe{
-    width:1280px;
-    height:720px;
-    border:none;
-    transform-origin:center center;
+iframe {
+    width: 1280px;
+    height: 720px;
+    border: none;
+    transform-origin: top left;
 }
 </style>
 </head>
@@ -58,6 +57,27 @@ window.addEventListener("resize",scaleFrame);
 window.addEventListener("orientationchange",scaleFrame);
 
 scaleFrame();
+
+</script>
+<script>
+
+function fitIframe() {
+
+    const iframe = document.querySelector("iframe");
+
+    const scaleX = window.innerWidth / 1280;
+    const scaleY = window.innerHeight / 720;
+
+    const scale = Math.min(scaleX, scaleY);
+
+    iframe.style.transform =
+        `scale(${scale})`;
+
+}
+
+window.addEventListener("resize", fitIframe);
+window.addEventListener("orientationchange", fitIframe);
+window.addEventListener("load", fitIframe);
 
 </script>
 
