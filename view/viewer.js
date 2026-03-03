@@ -44,6 +44,7 @@ function loadPresentation() {
         slideHeight: 720
     });
     setTimeout(scalePresentation, 500);
+    setTimeout(fitSlide, 700);
 }
 
 window.addEventListener("hashchange", () => {
@@ -75,3 +76,20 @@ function scalePresentation() {
 }
 window.addEventListener("resize", scalePresentation);
 window.addEventListener("orientationchange", scalePresentation);
+function fitSlide() {
+
+    const baseWidth = 1280;
+    const baseHeight = 720;
+
+    const scaleX = window.innerWidth / baseWidth;
+    const scaleY = window.innerHeight / baseHeight;
+
+    const scale = Math.min(scaleX, scaleY);
+
+    document.getElementById("scaleContainer")
+        .style.transform = `scale(${scale})`;
+}
+window.addEventListener("resize", fitSlide);
+window.addEventListener("orientationchange", () => {
+    setTimeout(fitSlide, 300);
+});
