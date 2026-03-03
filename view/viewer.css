@@ -40,15 +40,4 @@ html, body {
     border-radius: 6px;
     cursor: pointer;
 }
-/* ========================= */
-/* PPTX AUTO FIT */
-/* ========================= */
 
-#viewer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.slide {
-    transform-origin: center center;
-}
