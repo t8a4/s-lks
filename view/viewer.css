@@ -1,15 +1,10 @@
 html, body {
     margin: 0;
-    background: #000;
-    /* height: 100%;
-    overflow: hidden; */
+    height: 100%;
+    background: black;
 }
 
-/* ===============================
-   RESPONSIVE PRESENTATION BOX
-================================ */
-
-/* екран */
+/* SCREEN */
 #viewerWrapper {
     position: fixed;
     inset: 0;
@@ -19,33 +14,29 @@ html, body {
     align-items: center;
 
     background: black;
+}
+
+/* PRESENTATION BOX */
+#viewer {
+
+    width: min(100vw, calc(100vh * 16 / 9));
+    height: min(100vh, calc(100vw * 9 / 16));
+
+    background: black;
     overflow: hidden;
 }
 
-/* desktop presentation size */
-#viewer {
-    width: 1280px;
-    height: 720px;
-
-    max-width: 100vw;
-    max-height: 100vh;
-
-    aspect-ratio: 16 / 9;
-}
-
+/* fullscreen button */
 #fsBtn {
     position: fixed;
     bottom: 15px;
     right: 15px;
+    z-index: 9999;
+
     background: rgba(0,0,0,0.6);
     color: white;
     border: none;
-    font-size: 18px;
     padding: 10px 14px;
-    cursor: pointer;
     border-radius: 6px;
-}
-
-#fsBtn:hover {
-    background: rgba(0,0,0,0.9);
+    cursor: pointer;
 }
