@@ -24,7 +24,9 @@ iframe {
     width: 1280px;
     height: 720px;
     border: none;
-    transform-origin: top left;
+    
+    transform-origin: center center;
+    position: absolute;
 }
 </style>
 </head>
@@ -65,14 +67,22 @@ function fitIframe() {
 
     const iframe = document.querySelector("iframe");
 
-    const scaleX = window.innerWidth / 1280;
-    const scaleY = window.innerHeight / 720;
+    const baseWidth = 1280;
+    const baseHeight = 720;
 
-    const scale = Math.min(scaleX, scaleY);
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    const scale = Math.min(
+        vw / baseWidth,
+        vh / baseHeight
+    );
 
     iframe.style.transform =
-        `scale(${scale})`;
+        `translate(-50%, -50%) scale(${scale})`;
 
+    iframe.style.left = "50%";
+    iframe.style.top = "50%";
 }
 
 window.addEventListener("resize", fitIframe);
