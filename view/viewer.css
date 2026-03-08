@@ -137,11 +137,12 @@ html, body {
 #slides-prev img,
 #slides-next img{
     display:none !important;
+    pointer-events:none;
 }
 #slides-prev,
 #slides-next{
 
-    width:50%;
+    flex:1;
     height:47px;
 
     display:flex !important;
@@ -164,4 +165,9 @@ html, body {
     color:white;
     font-size:24px;
     font-weight:bold;
+}
+
+#customNav{
+    flex:1;
+    display:flex;
 }
