@@ -45,9 +45,9 @@ function loadPresentation() {
     });
     setTimeout(fitPresentation, 700);
     setTimeout(() => {
-    
-        const toolbar = document.querySelector(".slides-toolbar");
-        if(!toolbar) return;
+        
+        const next = document.getElementById("slides-next");
+        if(!next) return;
     
         const settings = document.createElement("div");
         settings.id = "slides-settings";
@@ -58,7 +58,7 @@ function loadPresentation() {
             </svg>
         `;
     
-        toolbar.appendChild(settings);
+        next.after(settings);
     
     }, 900);
 }
