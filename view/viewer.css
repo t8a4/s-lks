@@ -134,12 +134,12 @@ html, body {
 
     background:rgba(255,255,255,0.1);
 }
-#slides-prev img,
+/* #slides-prev img,
 #slides-next img{
     display:none !important;
     pointer-events:none;
-}
-#slides-prev,
+} */
+/* #slides-prev,
 #slides-next{
 
     flex:1;
@@ -165,9 +165,37 @@ html, body {
     color:white;
     font-size:24px;
     font-weight:bold;
-}
+} */
 
 #customNav{
     flex:1;
     display:flex;
+}
+#customNav{
+    flex:1;
+    display:flex;
+}
+
+/* стрелките */
+
+#slides-prev,
+#slides-next{
+
+    flex:1;
+
+    height:47px;
+
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+}
+
+/* svg размер */
+
+#slides-prev,
+#slides-next{
+    width:28px;
+    height:28px;
 }
