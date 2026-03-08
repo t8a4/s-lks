@@ -113,3 +113,7 @@ html, body {
 #slides-next:hover{
     background:rgba(255,255,255,0.12);
 }
+#customNav{
+    flex:1;
+    display:flex;
+}
