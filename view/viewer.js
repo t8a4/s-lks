@@ -145,8 +145,8 @@ function createSettingsPopup(){
     const popup = document.createElement("div");
     popup.id = "settingsPopup";
 
-    popup.innerHTML = `
     const current = parseHash();
+    popup.innerHTML = `
         <div class="settingsBox">
 
             <div class="settingsLogo">
