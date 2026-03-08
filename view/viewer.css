@@ -38,72 +38,83 @@ html, body {
     background: rgba(0,0,0,0.9);
 }
 
-/* TOP NAVBAR */
+/* NAVBAR BACKGROUND */
+
 .slides-toolbar{
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 50px;
+    position:fixed !important;
+    top:0;
+    left:0;
 
-    display: flex;
-    align-items: center;
+    width:100% !important;
+    height:48px;
 
-    background: rgba(0,0,0,0.6);
-    color: white !important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    padding: 0 !important;
-    margin: 0 !important;
+    background:#1e2f47;   /* тъмно синьо */
 
-    z-index: 9999;
+    padding:0 !important;
+    margin:0 !important;
+
+    z-index:9999;
 }
 
-/* hide slide counter */
+
+/* скриваме брояча */
+
 #slides-slide-num,
 #slides-slides-num-separator,
 #slides-total-slides-num{
     display:none !important;
 }
 
-/* hide pptx fullscreen (ще използваме твоя) */
+
+/* скриваме fullscreen (имаш си твой) */
+
 #slides-full-screen{
     display:none !important;
 }
 
-/* autoplay button */
+
+/* autoplay бутон */
+
 #slides-play-pause{
-    width:40px;
-    margin-left:10px;
+
+    position:absolute;
+    left:12px;
+
+    width:30px;
+    height:30px;
+
+    cursor:pointer;
 }
 
-/* prev area */
-#slides-prev{
-    flex:1;
-    height:50px;
-    display:flex !important;
-    justify-content:center;
-    align-items:center;
-    opacity:1 !important;
-}
 
-/* next area */
+/* стрелките */
+
+#slides-prev,
 #slides-next{
-    flex:1;
-    height:50px;
+
+    position:relative;
+
+    width:80px;
+    height:48px;
+
     display:flex !important;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+
     opacity:1 !important;
+
+    cursor:pointer;
 }
 
-/* bigger arrows */
+
+/* стрелките като текст */
+
 #slides-prev img,
 #slides-next img{
-    transform: scale(1.5);
-}
 
-/* hover highlight */
-#slides-prev:hover,
-#slides-next:hover{
-    background: rgba(255,255,255,0.1);
+    transform:scale(0); /* скриваме png стрелките */
 }
