@@ -96,106 +96,54 @@ html, body {
 #slides-prev,
 #slides-next{
 
-    position:relative;
+    flex:1;
 
-    width:80px;
-    height:48px;
+    height:47px;
 
     display:flex !important;
     align-items:center;
     justify-content:center;
 
-    opacity:1 !important;
-
     cursor:pointer;
-}
-
-
-/* стрелките като текст */
-
-#slides-prev img,
-#slides-next img{
-
-    transform:scale(0); /* скриваме png стрелките */
 }
 #slides-prev,
 #slides-next{
+    position: relative;
+}
 
+#slides-prev img,
+#slides-next img{
+    opacity:0;
+}
+#slides-prev::after{
+    content:"<";
+    position:absolute;
     font-size:26px;
     color:white;
     font-weight:bold;
 }
 
+#slides-next::after{
+    content:">";
+    position:absolute;
+    font-size:26px;
+    color:white;
+    font-weight:bold;
+}
+#customNav{
+    flex:1;
+    display:flex;
+}
 
-/* hover ефект */
-
+#slides-prev,
+#slides-next{
+    flex:1;
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
 #slides-prev:hover,
 #slides-next:hover{
-
-    background:rgba(255,255,255,0.1);
-}
-/* #slides-prev img,
-#slides-next img{
-    display:none !important;
-    pointer-events:none;
-} */
-/* #slides-prev,
-#slides-next{
-
-    flex:1;
-    height:47px;
-
-    display:flex !important;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-    user-select:none;
-}
-
-#slides-prev::before{
-    content:"<";
-    color:white;
-    font-size:24px;
-    font-weight:bold;
-}
-
-#slides-next::before{
-    content:">";
-    color:white;
-    font-size:24px;
-    font-weight:bold;
-} */
-
-#customNav{
-    flex:1;
-    display:flex;
-}
-#customNav{
-    flex:1;
-    display:flex;
-}
-
-/* стрелките */
-
-#slides-prev,
-#slides-next{
-
-    flex:1;
-
-    height:47px;
-
-    display:flex !important;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-}
-
-/* svg размер */
-
-#slides-prev,
-#slides-next{
-    width:28px;
-    height:28px;
+    background:rgba(255,255,255,0.12);
 }
