@@ -46,7 +46,7 @@ html, body {
     left:0;
 
     width:100% !important;
-    height:48px;
+    height:47px;
 
     display:flex;
     align-items:center;
@@ -117,4 +117,20 @@ html, body {
 #slides-next img{
 
     transform:scale(0); /* скриваме png стрелките */
+}
+#slides-prev,
+#slides-next{
+
+    font-size:26px;
+    color:white;
+    font-weight:bold;
+}
+
+
+/* hover ефект */
+
+#slides-prev:hover,
+#slides-next:hover{
+
+    background:rgba(255,255,255,0.1);
 }
