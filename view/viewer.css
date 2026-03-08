@@ -70,7 +70,7 @@ html, body {
 }
 
 
-/* скриваме fullscreen (имаш си твой) */
+/* скриваме fullscreen (desktop old icon) */
 
 #slides-full-screen{
     display:none !important;
