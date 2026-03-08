@@ -38,7 +38,7 @@
                         "style":"width: 90%; padding: 10px; text-align: center;font-size:18px; color: "+data.navTxtColor+";" ////New for Ver: 1.2.1
                     })                
                 );
-                $("#"+divId+" .slides-toolbar").prepend(
+                $("#"+divId+" .slides-toolbar").append(
                     $("<img></img>").attr({
                         "id":"slides-next",
                         "class":"slides-nav",
@@ -98,7 +98,7 @@
                         })
                     );
                 }
-                $("#"+divId+" .slides-toolbar").prepend(
+                $("#"+divId+" .slides-toolbar").append(
                     $("<img></img>").attr({
                         "id":"slides-prev",
                         "class":"slides-nav",
