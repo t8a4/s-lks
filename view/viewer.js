@@ -44,6 +44,7 @@ function loadPresentation() {
         slideHeight: 720
     });
     setTimeout(fitPresentation, 700);
+    waitForToolbar();
     setTimeout(() => {
         
         const next = document.getElementById("slides-next");
@@ -97,3 +98,34 @@ window.addEventListener("orientationchange", () => {
     setTimeout(fitPresentation, 300);
 });
 
+function addSettingsButton(){
+
+    const toolbar = document.querySelector(".slides-toolbar");
+    if(!toolbar) return false;
+
+    if(document.getElementById("slides-settings")) return true;
+
+    const settings = document.createElement("div");
+    settings.id = "slides-settings";
+
+    settings.innerHTML = `
+        <svg viewBox="0 0 24 24" width="22" height="22">
+            <path fill="white" d="M12 8a4 4 0 100 8 4 4 0 000-8zm9 4a7.8 7.8 0 00-.1-1l2.1-1.6-2-3.4-2.5 1a7.9 7.9 0 00-1.7-1l-.4-2.7H9.6l-.4 2.7a7.9 7.9 0 00-1.7 1l-2.5-1-2 3.4L5.1 11a7.8 7.8 0 000 2L3 14.6l2 3.4 2.5-1c.5.4 1.1.7 1.7 1l.4 2.7h4.8l.4-2.7c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.4L20.9 13c.1-.3.1-.7.1-1z"/>
+        </svg>
+    `;
+
+    toolbar.appendChild(settings);
+
+    return true;
+}
+function waitForToolbar(){
+
+    const interval = setInterval(()=>{
+
+        if(addSettingsButton()){
+            clearInterval(interval);
+        }
+
+    },200);
+
+}
