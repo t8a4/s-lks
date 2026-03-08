@@ -132,3 +132,76 @@ html, body {
 #slides-settings:hover{
     background:rgba(255,255,255,0.12);
 }
+#settingsPopup{
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,0.65);
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    z-index:20000;
+}
+
+#settingsPopup.show{
+    display:flex;
+}
+
+.settingsBox{
+
+    width:340px;
+
+    background:#1e2f47;
+    border-radius:10px;
+
+    padding:22px;
+
+    color:white;
+    font-family:sans-serif;
+}
+
+.settingsTitle{
+
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+.settingsBox label{
+
+    display:flex;
+    justify-content:space-between;
+
+    margin:10px 0;
+}
+
+.settingsBox input,
+.settingsBox select{
+
+    background:#0f1d30;
+    color:white;
+
+    border:1px solid #2d4a73;
+
+    padding:4px;
+}
+
+.settingsBox button{
+
+    margin-top:18px;
+    width:100%;
+
+    padding:8px;
+
+    background:#2d4a73;
+    border:none;
+    color:white;
+
+    cursor:pointer;
+}
+
+.settingsBox button:hover{
+    background:#3f6aa5;
+}
