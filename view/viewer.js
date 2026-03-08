@@ -59,13 +59,6 @@ function loadPresentation() {
         nav.appendChild(next);
         
         toolbar.appendChild(nav);
-        
-        /* заменяме png стрелките със svg */
-        
-        prev.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polyline points='15,4 7,12 15,20' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>";
-        
-        next.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polyline points='9,4 17,12 9,20' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>";
-        
         prev.style.display = "flex";
 
     }, 900);
