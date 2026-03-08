@@ -111,24 +111,44 @@ html, body {
     position: relative;
 }
 
-#slides-prev img,
-#slides-next img{
-    opacity:0;
-}
-#slides-prev::after{
-    content:"<";
-    position:absolute;
-    font-size:26px;
-    color:white;
-    font-weight:bold;
+#slides-prev,
+#slides-next{
+
+    flex:1;
+    height:47px;
+
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:22px;
+
+    /* скриваме оригиналната PNG */
+    color:transparent;
 }
 
-#slides-next::after{
-    content:">";
-    position:absolute;
-    font-size:26px;
-    color:white;
-    font-weight:bold;
+
+/* LEFT */
+
+#slides-prev{
+    background-image:url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\
+<polyline points='15,4 7,12 15,20' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/>\
+</svg>");
+}
+
+
+/* RIGHT */
+
+#slides-next{
+    background-image:url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\
+<polyline points='9,4 17,12 9,20' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/>\
+</svg>");
 }
 #customNav{
     flex:1;
