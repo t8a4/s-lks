@@ -134,3 +134,34 @@ html, body {
 
     background:rgba(255,255,255,0.1);
 }
+#slides-prev img,
+#slides-next img{
+    display:none !important;
+}
+#slides-prev,
+#slides-next{
+
+    width:50%;
+    height:47px;
+
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+    user-select:none;
+}
+
+#slides-prev::before{
+    content:"<";
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+}
+
+#slides-next::before{
+    content:">";
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+}
