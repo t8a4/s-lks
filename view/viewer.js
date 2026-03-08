@@ -52,6 +52,7 @@ function loadPresentation() {
     
         const settings = document.createElement("div");
         settings.id = "slides-settings";
+        
     
         settings.innerHTML = `
             <svg viewBox="0 0 24 24" width="22" height="22">
@@ -115,6 +116,14 @@ function addSettingsButton(){
     `;
 
     toolbar.appendChild(settings);
+    settings.onclick = () => {
+        
+        createSettingsPopup();
+    
+        const popup = document.getElementById("settingsPopup");
+        popup.classList.add("show");
+    
+    };
 
     return true;
 }
@@ -129,3 +138,101 @@ function waitForToolbar(){
     },200);
 
 }
+function createSettingsPopup(){
+
+    if(document.getElementById("settingsPopup")) return;
+
+    const popup = document.createElement("div");
+    popup.id = "settingsPopup";
+
+    popup.innerHTML = `
+    const current = parseHash();
+        <div class="settingsBox">
+
+            <div class="settingsLogo">
+                <img src="logo.svg" alt="logo">
+            </div>
+
+            <div class="settingsTitle">⚙ Settings</div>
+
+            <label>
+                Speed
+                <input id="setSpeed" type="number" step="0.1" value="${current.speed}">
+            </label>
+
+            <label>
+                Transition
+                <select id="setTransition">
+                    <option value="fade">fade</option>
+                    <option value="slide">slide</option>
+                    <option value="default">default</option>
+                    <option value="random">random</option>
+                </select>
+            </label>
+
+            <label>
+                Loop
+                <select id="setLoop">
+                    <option value="true">on</option>
+                    <option value="false">off</option>
+                </select>
+            </label>
+
+            <label>
+                Autoplay delay
+                <input id="setAutoplay" type="number" step="1" placeholder="0 = off">
+            </label>
+
+            <button id="applySettings">Apply</button>
+
+        </div>
+    `;
+
+    document.body.appendChild(popup);
+    document.getElementById("setTransition").value = current.transition;
+    document.getElementById("setLoop").value = current.loop;
+}
+document.addEventListener("click",(e)=>{
+
+    const popup = document.getElementById("settingsPopup");
+    const box = document.querySelector(".settingsBox");
+
+    if(!popup) return;
+
+    if(popup.classList.contains("show")){
+
+        if(!box.contains(e.target) && e.target.id !== "slides-settings"){
+            popup.classList.remove("show");
+        }
+
+    }
+
+});
+document.addEventListener("click",(e)=>{
+
+    if(e.target.id === "applySettings"){
+
+        const speed = parseFloat(document.getElementById("setSpeed").value);
+        const transition = document.getElementById("setTransition").value;
+        const loop = document.getElementById("setLoop").value === "true";
+        const autoplay = parseFloat(document.getElementById("setAutoplay").value);
+
+        if(window.pptxjslideObj){
+
+            window.pptxjslideObj.settings.transition = transition;
+            window.pptxjslideObj.settings.transitionTime = speed;
+            window.pptxjslideObj.settings.loop = loop;
+
+            if(autoplay > 0){
+                window.pptxjslideObj.settings.autoSlide = autoplay;
+            }else{
+                window.pptxjslideObj.settings.autoSlide = false;
+            }
+
+        }
+
+        document.getElementById("settingsPopup").classList.remove("show");
+
+    }
+
+});
