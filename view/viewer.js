@@ -46,21 +46,28 @@ function loadPresentation() {
     setTimeout(fitPresentation, 700);
     setTimeout(() => {
 
-        const toolbar = document.querySelector(".slides-toolbar");
-        const prev = document.getElementById("slides-prev");
-        const next = document.getElementById("slides-next");
-
-        if (!toolbar || !prev || !next) return;
-
-        const nav = document.createElement("div");
-        nav.id = "customNav";
+            const toolbar = document.querySelector(".slides-toolbar");
         
-        nav.appendChild(prev);
-        nav.appendChild(next);
+            const prev = document.getElementById("slides-prev");
+            const next = document.getElementById("slides-next");
+            const play = document.getElementById("slides-play-pause");
         
-        toolbar.appendChild(nav);
-        prev.style.display = "flex";
-
+            if (!toolbar || !prev || !next || !play) return;
+        
+            /* нов container за стрелките */
+        
+            const nav = document.createElement("div");
+            nav.id = "customNav";
+        
+            nav.appendChild(prev);
+            nav.appendChild(next);
+        
+            /* layout */
+        
+            toolbar.innerHTML = "";
+            toolbar.appendChild(play);
+            toolbar.appendChild(nav);
+        
     }, 900);
 }
 
