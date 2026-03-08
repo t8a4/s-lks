@@ -38,6 +38,72 @@ html, body {
     background: rgba(0,0,0,0.9);
 }
 
-.slideModeBar {
-    display: none !important;
+/* TOP NAVBAR */
+.slides-toolbar{
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+
+    background: rgba(0,0,0,0.6);
+    color: white !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    z-index: 9999;
+}
+
+/* hide slide counter */
+#slides-slide-num,
+#slides-slides-num-separator,
+#slides-total-slides-num{
+    display:none !important;
+}
+
+/* hide pptx fullscreen (ще използваме твоя) */
+#slides-full-screen{
+    display:none !important;
+}
+
+/* autoplay button */
+#slides-play-pause{
+    width:40px;
+    margin-left:10px;
+}
+
+/* prev area */
+#slides-prev{
+    flex:1;
+    height:50px;
+    display:flex !important;
+    justify-content:center;
+    align-items:center;
+    opacity:1 !important;
+}
+
+/* next area */
+#slides-next{
+    flex:1;
+    height:50px;
+    display:flex !important;
+    justify-content:center;
+    align-items:center;
+    opacity:1 !important;
+}
+
+/* bigger arrows */
+#slides-prev img,
+#slides-next img{
+    transform: scale(1.5);
+}
+
+/* hover highlight */
+#slides-prev:hover,
+#slides-next:hover{
+    background: rgba(255,255,255,0.1);
 }
