@@ -117,3 +117,18 @@ html, body {
     flex:1;
     display:flex;
 }
+#slides-settings{
+
+    width:48px;
+    height:47px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+}
+
+#slides-settings:hover{
+    background:rgba(255,255,255,0.12);
+}
