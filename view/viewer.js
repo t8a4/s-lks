@@ -79,3 +79,8 @@ window.addEventListener("resize", fitPresentation);
 window.addEventListener("orientationchange", () => {
     setTimeout(fitPresentation, 300);
 });
+
+setTimeout(() => {
+    const prev = document.getElementById("slides-prev");
+    if(prev) prev.style.display = "flex";
+}, 1000);
