@@ -44,6 +44,25 @@ function loadPresentation() {
         slideHeight: 720
     });
     setTimeout(fitPresentation, 700);
+    setTimeout(() => {
+
+        const toolbar = document.querySelector(".slides-toolbar");
+        const prev = document.getElementById("slides-prev");
+        const next = document.getElementById("slides-next");
+
+        if (!toolbar || !prev || !next) return;
+
+        const nav = document.createElement("div");
+        nav.id = "customNav";
+
+        nav.appendChild(prev);
+        nav.appendChild(next);
+
+        toolbar.appendChild(nav);
+
+        prev.style.display = "flex";
+
+    }, 900);
 }
 
 window.addEventListener("hashchange", () => {
@@ -80,16 +99,3 @@ window.addEventListener("orientationchange", () => {
     setTimeout(fitPresentation, 300);
 });
 
-setTimeout(() => {
-    const prev = document.getElementById("slides-prev");
-    if(prev) prev.style.display = "flex";
-}, 1000);
-setTimeout(() => {
-
-    const prev = document.getElementById("slides-prev");
-    const next = document.getElementById("slides-next");
-
-    if(prev) prev.innerHTML = "<";
-    if(next) next.innerHTML = ">";
-
-}, 800);
