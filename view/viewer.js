@@ -84,3 +84,12 @@ setTimeout(() => {
     const prev = document.getElementById("slides-prev");
     if(prev) prev.style.display = "flex";
 }, 1000);
+setTimeout(() => {
+
+    const prev = document.getElementById("slides-prev");
+    const next = document.getElementById("slides-next");
+
+    if(prev) prev.innerHTML = "<";
+    if(next) next.innerHTML = ">";
+
+}, 800);
