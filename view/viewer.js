@@ -212,26 +212,24 @@ document.addEventListener("click",(e)=>{
 
     if(e.target.id === "applySettings"){
 
-        const speed = parseFloat(document.getElementById("setSpeed").value);
+        const speed = document.getElementById("setSpeed").value;
         const transition = document.getElementById("setTransition").value;
-        const loop = document.getElementById("setLoop").value === "true";
-        const autoplay = parseFloat(document.getElementById("setAutoplay").value);
+        const loop = document.getElementById("setLoop").value;
+        const autoplay = document.getElementById("setAutoplay").value;
 
-        if(window.pptxjslideObj){
+        const talk = parseHash().talk;
 
-            window.pptxjslideObj.settings.transition = transition;
-            window.pptxjslideObj.settings.transitionTime = speed;
-            window.pptxjslideObj.settings.loop = loop;
+        let hash = `#${talk}?transition=${transition}&speed=${speed}&loop=${loop}`;
 
-            if(autoplay > 0){
-                window.pptxjslideObj.settings.autoSlide = autoplay;
-            }else{
-                window.pptxjslideObj.settings.autoSlide = false;
-            }
-
+        if(autoplay && autoplay > 0){
+            hash += `&autoplay=${autoplay}`;
         }
 
+        window.location.hash = hash;
+
         document.getElementById("settingsPopup").classList.remove("show");
+
+        window.location.reload();
 
     }
 
