@@ -6,7 +6,7 @@ function parseHash() {
         transition: "fade",
         speed: 0.4`,
         loop: false,
-        autoplay: false
+        autoplay: 5
     };
 
     if (!raw) return defaults;
