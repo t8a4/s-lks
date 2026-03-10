@@ -6,7 +6,7 @@ function parseHash() {
         transition: "fade",
         speed: 0.4,
         loop: false,
-        autoplay: false
+        autoplay: 5
     };
 
     if (!raw) return defaults;
@@ -103,14 +103,17 @@ function addSettingsButton(){
 
     toolbar.appendChild(settings);
 
-    settings.onclick = () => {
+    settings.addEventListener("pointerdown", (e) => {
 
+        e.stopPropagation();
+        e.preventDefault();
+    
         createSettingsPopup();
-
+    
         const popup = document.getElementById("settingsPopup");
         popup.classList.toggle("show");
-
-    };
+    
+    });
 
     return true;
 }
@@ -186,6 +189,9 @@ function createSettingsPopup(){
     }
 
 }
+document.getElementById("settingsPopup").addEventListener("click", (e) => {
+    e.stopPropagation();
+});
 document.addEventListener("click",(e)=>{
 
     const popup = document.getElementById("settingsPopup");
