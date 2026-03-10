@@ -6,7 +6,7 @@ function parseHash() {
         transition: "fade",
         speed: 0.4,
         loop: false,
-        autoplay: 5
+        autoplay: false
     };
 
     if (!raw) return defaults;
@@ -145,8 +145,11 @@ function createSettingsPopup(){
                 <img src="logo.svg">
             </div>
 
-            <div class="settingsTitle">⚙ Settings</div>
-
+            <div class="settingsHeader">
+                <span>⚙ Settings</span>
+                <button id="closeSettings">✕</button>
+            </div>
+    
             <label>
                 Speed
                 <input id="setSpeed" type="number" step="0.1" value="${current.speed}">
@@ -181,7 +184,9 @@ function createSettingsPopup(){
         `;
 
         document.body.appendChild(popup);
-
+        document.getElementById("closeSettings").onclick = () => {
+            popup.classList.remove("show");
+        };
         popup.addEventListener("click", (e)=>{
             e.stopPropagation();
         });
@@ -198,7 +203,7 @@ document.addEventListener("click",(e)=>{
     const popup = document.getElementById("settingsPopup");
     const box = document.querySelector(".settingsBox");
 
-    if(!popup) return;
+    if(!popup || !box) return;
 
     if(popup.classList.contains("show")){
 
