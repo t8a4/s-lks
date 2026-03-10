@@ -5,7 +5,8 @@ function parseHash() {
         talk: "talk1",
         transition: "fade",
         speed: 0.4,
-        loop: false
+        loop: false,
+        autoplay: false
     };
 
     if (!raw) return defaults;
@@ -17,12 +18,13 @@ function parseHash() {
         talk: talkPart || defaults.talk,
         transition: params.get("transition") || defaults.transition,
         speed: parseFloat(params.get("speed")) || defaults.speed,
-        loop: params.get("loop") === "true"
+        loop: params.get("loop") === "true",
+        autoplay: parseFloat(params.get("autoplay")) || false
     };
 }
 
 function loadPresentation() {
-    const { talk, transition, speed, loop } = parseHash();
+    const { talk, transition, speed, loop, autoplay } = parseHash();
     const file = `../presentations/${talk}.pptx`;
 
     document.getElementById("viewer").innerHTML = "";
@@ -33,12 +35,13 @@ function loadPresentation() {
         keyBoardShortCut: true,
         mediaProcess: true,
 
-        slideModeConfig: {
-            transition: transition,
-            transitionTime: speed,
-            loop: loop,
-            nav: true,
-        },
+    slideModeConfig: {
+        transition: transition,
+        transitionTime: speed,
+        loop: loop,
+        autoSlide: autoplay,
+        nav: true,
+    },
 
         slideWidth: 1280,
         slideHeight: 720
@@ -180,8 +183,8 @@ function createSettingsPopup(){
 
             <label>
                 Autoplay delay
-                <input id="setAutoplay" type="number" step="1" placeholder="0 = off">
-            </label>
+                <input id="setAutoplay" type="number" step="1" value="${current.autoplay || ""}">            
+                </label>
 
             <button id="applySettings">Apply</button>
 
@@ -210,27 +213,21 @@ document.addEventListener("click",(e)=>{
 });
 document.addEventListener("click",(e)=>{
 
-    if(e.target.id === "applySettings"){
+    if(e.target.id !== "applySettings") return;
 
-        const speed = document.getElementById("setSpeed").value;
-        const transition = document.getElementById("setTransition").value;
-        const loop = document.getElementById("setLoop").value;
-        const autoplay = document.getElementById("setAutoplay").value;
+    const speed = parseFloat(document.getElementById("setSpeed").value);
+    const transition = document.getElementById("setTransition").value;
+    const loop = document.getElementById("setLoop").value;
+    const delay = parseFloat(document.getElementById("setAutoplay").value);
 
-        const talk = parseHash().talk;
+    const talk = parseHash().talk;
 
-        let hash = `#${talk}?transition=${transition}&speed=${speed}&loop=${loop}`;
+    let hash = `#${talk}?transition=${transition}&speed=${speed}&loop=${loop}`;
 
-        if(autoplay && autoplay > 0){
-            hash += `&autoplay=${autoplay}`;
-        }
-
-        window.location.hash = hash;
-
-        document.getElementById("settingsPopup").classList.remove("show");
-
-        window.location.reload();
-
+    if(delay && delay > 0){
+        hash += `&autoplay=${delay}`;
     }
+
+    window.location.hash = hash;
 
 });
