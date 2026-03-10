@@ -154,7 +154,10 @@ function createSettingsPopup(){
     
             <label>
                 Speed
-                <input id="setSpeed" type="number" step="0.1" value="${current.speed}">
+                <div class="sliderRow">
+                    <input id="setSpeed" type="range" min="0.1" max="2" step="0.1" value="${current.speed}">
+                    <span id="speedValue">${current.speed}</span>
+                </div>
             </label>
 
             <label>
@@ -177,7 +180,11 @@ function createSettingsPopup(){
 
             <label>
                 Autoplay delay
-                <input id="setAutoplay" type="number" step="1" value="${current.autoplay}">            
+                <div class="delayRow">
+                    <button id="delayMinus">◀</button>
+                    <span id="delayValue">${current.autoplay}</span>
+                    <button id="delayPlus">▶</button>
+                </div>
             </label>
 
             <button id="applySettings">Apply</button>
@@ -186,13 +193,35 @@ function createSettingsPopup(){
         `;
 
         document.body.appendChild(popup);
+
+        const speedSlider = document.getElementById("setSpeed");
+        const speedValue = document.getElementById("speedValue");
+        
+        speedSlider.oninput = () => {
+            speedValue.textContent = speedSlider.value;
+        };
+        let delay = current.autoplay || 0;
+
+        const delayValue = document.getElementById("delayValue");
+        
+        document.getElementById("delayMinus").onclick = () => {
+            if(delay > 0){
+                delay--;
+                delayValue.textContent = delay;
+            }
+        };
+        
+        document.getElementById("delayPlus").onclick = () => {
+            delay++;
+            delayValue.textContent = delay;
+        };
         document.getElementById("applySettings").onclick = () => {
 
             const speed = parseFloat(document.getElementById("setSpeed").value);
             const transition = document.getElementById("setTransition").value;
             const loop = document.getElementById("setLoop").value;
-            const delay = parseFloat(document.getElementById("setAutoplay").value);
-        
+            const delay = parseFloat(document.getElementById("delayValue").textContent);
+            
             const talk = parseHash().talk;
         
             let hash = `#${talk}?transition=${transition}&speed=${speed}&loop=${loop}`;
