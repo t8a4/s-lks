@@ -203,17 +203,48 @@ function createSettingsPopup(){
 
         const delayValue = document.getElementById("delayValue");
         
-        document.getElementById("delayMinus").onclick = () => {
-            if(delay > 0){
-                delay--;
-                delayValue.textContent = delay;
-            }
-        };
+        const minus = document.getElementById("delayMinus");
+        const plus = document.getElementById("delayPlus");
         
-        document.getElementById("delayPlus").onclick = () => {
-            delay++;
+        let delayTimer;
+        let speed = 200;
+        
+        function changeDelay(step){
+        
+            delay += step;
+        
+            if(delay < 0) delay = 0;
+        
             delayValue.textContent = delay;
-        };
+        }
+        
+        function startHold(step){
+        
+            speed = 200;
+        
+            changeDelay(step);
+        
+            delayTimer = setInterval(()=>{
+        
+                changeDelay(step);
+        
+                if(speed > 40){
+                    speed -= 20;
+                    clearInterval(delayTimer);
+                    delayTimer = setInterval(()=>changeDelay(step), speed);
+                }
+        
+            }, speed);
+        }
+        
+        function stopHold(){
+            clearInterval(delayTimer);
+        }
+        
+        plus.addEventListener("mousedown",()=>startHold(1));
+        minus.addEventListener("mousedown",()=>startHold(-1));
+        
+        document.addEventListener("mouseup",stopHold);
         document.getElementById("applySettings").onclick = () => {
 
             const speed = parseFloat(document.getElementById("setSpeed").value);
@@ -246,3 +277,14 @@ function createSettingsPopup(){
     }
 
 }
+document.addEventListener("contextmenu",(e)=>{
+    e.preventDefault();
+});
+document.addEventListener("copy",(e)=>{
+    e.preventDefault();
+});
+document.addEventListener("dragstart",(e)=>{
+    if(e.target.tagName === "IMG"){
+        e.preventDefault();
+    }
+});
