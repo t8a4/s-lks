@@ -133,75 +133,128 @@ html, body {
     background:rgba(255,255,255,0.12);
 }
 #settingsPopup{
-
     position:fixed;
     inset:0;
 
-    background:rgba(0,0,0,0.65);
-
-    display:none;
+    display:flex;
     align-items:center;
     justify-content:center;
 
-    z-index:20000;
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(4px);
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:opacity .2s ease;
 }
 
 #settingsPopup.show{
-    display:flex;
+    opacity:1;
+    pointer-events:auto;
 }
-
 .settingsBox{
 
-    width:340px;
+    width:320px;
+    max-width:90vw;
 
-    background:#1e2f47;
+    background:#111;
+    color:white;
+
     border-radius:10px;
 
     padding:22px;
 
-    color:white;
-    font-family:sans-serif;
+    box-shadow:0 15px 40px rgba(0,0,0,0.45);
+
+    font-family:system-ui, sans-serif;
 }
-
-.settingsTitle{
-
-    font-size:20px;
-    margin-bottom:15px;
-}
-
-.settingsBox label{
+.settingsHeader{
 
     display:flex;
+    align-items:center;
     justify-content:space-between;
 
-    margin:10px 0;
+    font-size:18px;
+    font-weight:600;
+
+    margin-bottom:18px;
 }
+#closeSettings{
 
-.settingsBox input,
-.settingsBox select{
+    width:28px;
+    height:28px;
 
-    background:#0f1d30;
-    color:white;
-
-    border:1px solid #2d4a73;
-
-    padding:4px;
-}
-
-.settingsBox button{
-
-    margin-top:18px;
-    width:100%;
-
-    padding:8px;
-
-    background:#2d4a73;
     border:none;
+    border-radius:6px;
+
+    background:#1f1f1f;
     color:white;
+
+    font-size:16px;
 
     cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:background .15s ease;
 }
 
-.settingsBox button:hover{
-    background:#3f6aa5;
+#closeSettings:hover{
+    background:#333;
+}
+.settingsLogo{
+
+    display:flex;
+    justify-content:center;
+
+    margin-bottom:16px;
+}
+
+.settingsLogo img{
+
+    width:120px;
+    height:auto;
+
+    object-fit:contain;
+}
+.settingsLogo{
+
+    display:flex;
+    justify-content:center;
+
+    margin-bottom:16px;
+}
+
+.settingsLogo img{
+
+    width:120px;
+    height:auto;
+
+    object-fit:contain;
+}
+#applySettings{
+
+    margin-top:12px;
+
+    width:100%;
+    padding:8px;
+
+    border:none;
+    border-radius:6px;
+
+    background:#2b66ff;
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:background .15s ease;
+}
+
+#applySettings:hover{
+    background:#3b75ff;
 }
