@@ -154,7 +154,7 @@ function createSettingsPopup(){
                 Transition
                 <select id="setTransition">
                     <option value="fade">fade</option>
-                    <option value="slide">slide</option>
+                    <option value="slid">slid</option>
                     <option value="default">default</option>
                     <option value="random">random</option>
                 </select>
