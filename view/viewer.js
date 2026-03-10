@@ -4,7 +4,7 @@ function parseHash() {
     const defaults = {
         talk: "talk1",
         transition: "fade",
-        speed: 0.4`,
+        speed: 0.4,
         loop: false,
         autoplay: 5
     };
