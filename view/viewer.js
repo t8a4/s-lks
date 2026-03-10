@@ -4,7 +4,7 @@ function parseHash() {
     const defaults = {
         talk: "talk1",
         transition: "fade",
-        speed: 0.4,
+        speed: 0.4`,
         loop: false,
         autoplay: false
     };
@@ -19,7 +19,9 @@ function parseHash() {
         transition: params.get("transition") || defaults.transition,
         speed: parseFloat(params.get("speed")) || defaults.speed,
         loop: params.get("loop") === "true",
-        autoplay: parseFloat(params.get("autoplay")) || false
+        autoplay: params.get("autoplay") !== null
+            ? parseFloat(params.get("autoplay"))
+            : defaults.autoplay
     };
 }
 
@@ -175,7 +177,7 @@ function createSettingsPopup(){
 
             <label>
                 Autoplay delay
-                <input id="setAutoplay" type="number" step="1" value="${current.autoplay || ""}">
+                <input id="setAutoplay" type="number" step="1" value="${current.autoplay}">            
             </label>
 
             <button id="applySettings">Apply</button>
