@@ -103,15 +103,15 @@ function addSettingsButton(){
 
     toolbar.appendChild(settings);
 
-    settings.addEventListener("pointerdown", (e) => {
+    settings.addEventListener("click", (e) => {
 
         e.stopPropagation();
-        e.preventDefault();
     
         createSettingsPopup();
     
         const popup = document.getElementById("settingsPopup");
-        popup.classList.add("show");    
+        popup.classList.add("show");
+    
     });
 
     return true;
