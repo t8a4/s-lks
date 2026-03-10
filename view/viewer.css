@@ -258,3 +258,27 @@ html, body {
 #applySettings:hover{
     background:#3b75ff;
 }
+.settingsBox label{
+
+    display:block;
+
+    font-size:13px;
+
+    margin-bottom:14px;
+}
+.settingsBox input,
+.settingsBox select{
+
+    width:100%;
+    margin-top:4px;
+
+    padding:6px 8px;
+
+    background:#1f1f1f;
+    color:white;
+
+    border:1px solid #333;
+    border-radius:6px;
+
+    font-size:14px;
+}
