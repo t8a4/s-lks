@@ -184,6 +184,25 @@ function createSettingsPopup(){
         `;
 
         document.body.appendChild(popup);
+        document.getElementById("applySettings").onclick = () => {
+
+            const speed = parseFloat(document.getElementById("setSpeed").value);
+            const transition = document.getElementById("setTransition").value;
+            const loop = document.getElementById("setLoop").value;
+            const delay = parseFloat(document.getElementById("setAutoplay").value);
+        
+            const talk = parseHash().talk;
+        
+            let hash = `#${talk}?transition=${transition}&speed=${speed}&loop=${loop}`;
+        
+            if(delay && delay > 0){
+                hash += `&autoplay=${delay}`;
+            }
+        
+            window.location.hash = hash;
+        
+        };
+        
         document.getElementById("closeSettings").onclick = () => {
             popup.classList.remove("show");
         };
@@ -197,40 +216,3 @@ function createSettingsPopup(){
     }
 
 }
-
-document.addEventListener("click",(e)=>{
-
-    const popup = document.getElementById("settingsPopup");
-    const box = document.querySelector(".settingsBox");
-
-    if(!popup || !box) return;
-
-    if(popup.classList.contains("show")){
-
-        if(!box.contains(e.target) && e.target.id !== "slides-settings"){
-            popup.classList.remove("show");
-        }
-
-    }
-
-});
-document.addEventListener("click",(e)=>{
-
-    if(e.target.id !== "applySettings") return;
-
-    const speed = parseFloat(document.getElementById("setSpeed").value);
-    const transition = document.getElementById("setTransition").value;
-    const loop = document.getElementById("setLoop").value;
-    const delay = parseFloat(document.getElementById("setAutoplay").value);
-
-    const talk = parseHash().talk;
-
-    let hash = `#${talk}?transition=${transition}&speed=${speed}&loop=${loop}`;
-
-    if(delay && delay > 0){
-        hash += `&autoplay=${delay}`;
-    }
-
-    window.location.hash = hash;
-
-});
