@@ -111,8 +111,7 @@ function addSettingsButton(){
         createSettingsPopup();
     
         const popup = document.getElementById("settingsPopup");
-        popup.classList.toggle("show");
-    
+        popup.classList.add("show");    
     });
 
     return true;
@@ -183,15 +182,17 @@ function createSettingsPopup(){
 
         document.body.appendChild(popup);
 
+        popup.addEventListener("click", (e)=>{
+            e.stopPropagation();
+        });
+
         document.getElementById("setTransition").value = current.transition;
         document.getElementById("setLoop").value = current.loop;
 
     }
 
 }
-document.getElementById("settingsPopup").addEventListener("click", (e) => {
-    e.stopPropagation();
-});
+
 document.addEventListener("click",(e)=>{
 
     const popup = document.getElementById("settingsPopup");
